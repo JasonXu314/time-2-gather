@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb';
 import Head from 'next/head';
 import Link from 'next/link';
 import { GetServerSideProps, NextPage } from 'next/types';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { Fetcher } from 'swr/dist/types';
 import Button from '../components/Button/Button';
@@ -57,11 +57,15 @@ const Index: NextPage<Props> = ({ token: initToken }) => {
 	const [token, setToken] = useState<string | undefined>(initToken || Cookies.get('token'));
 	const [creatingEvent, setCreatingEvent] = useState<boolean>(false);
 
-	const { data: user, error: userError } = useSWR('/api/users/self', getUserFn);
+	const { data: user, error: userError, revalidate: revalidateUser } = useSWR('/api/users/self', getUserFn);
 	const { data: events, error: eventsError, revalidate, mutate } = useSWR('/api/events', getEvtFn);
 
 	const [detailEvent, setDetailEvent] = useState<CalendarEvent | null>(null);
 	const [editEvent, setEditEvent] = useState<CalendarEvent | null>(null);
+
+	useEffect(() => {
+		revalidateUser();
+	}, [token, revalidateUser]);
 
 	const submitEvent = useCallback(
 		async (event: PostCalendarEvent) => {
