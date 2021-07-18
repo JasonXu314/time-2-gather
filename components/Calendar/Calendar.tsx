@@ -35,7 +35,7 @@ const Calendar: React.FC<Props> = ({ events, viewDetails }) => {
 	return (
 		<div className={styles.main}>
 			<div className={styles.controls}>
-				<Dropdown options={monthOptions} onChange={(evt) => setMonth(parseInt(evt.target.value))} />
+				<Dropdown options={monthOptions} onChange={(evt) => setMonth(parseInt(evt.target.value))} value={month} />
 			</div>
 			<div className={styles.days}>
 				{['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day, i) => (

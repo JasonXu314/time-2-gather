@@ -75,10 +75,10 @@ const Index: NextPage<Props> = ({ token: initToken }) => {
 				.catch((err: AxiosError<EventCreateFailureResponse>) => {
 					if (err.response) {
 						console.log(err.response.data);
-						throw err.response.data.reason;
+						throw new Error(err.response.data.reason);
 					}
 					console.log(err);
-					throw 'Unknown error occured';
+					throw new Error('Unknown error occured');
 				});
 			mutate((events) => [
 				...(events || []),

@@ -88,7 +88,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				res.status(400).json({ type: 'failure', reason: 'End date is required' });
 				return;
 			}
-			if (!description) {
+			if (description === undefined) {
 				res.status(400).json({ type: 'failure', reason: 'Description is required' });
 				return;
 			}
