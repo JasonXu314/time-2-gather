@@ -89,7 +89,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				return;
 			}
 			if (description === undefined) {
-				res.status(400).json({ type: 'failure', reason: 'Description is required' });
+				res.status(400).json({ type: 'failure', reason: 'Description is required, even if empty' });
 				return;
 			}
 			if (new Date(start) > new Date(end)) {
