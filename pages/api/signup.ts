@@ -38,7 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>)
 				return;
 			}
 
-			const client = await MongoClient.connect(process.env.MONGODB_URL!, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+			const client = await MongoClient.connect(process.env.MONGODB_URL!).catch((err) => {
 				res.status(500).json({ type: 'failure', reason: 'Failed to connect to DB' });
 				console.log(err);
 			});

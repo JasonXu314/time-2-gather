@@ -13,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				return;
 			}
 
-			const client = await MongoClient.connect(process.env.MONGODB_URL!, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+			const client = await MongoClient.connect(process.env.MONGODB_URL!).catch((err) => {
 				res.status(500).json({ type: 'failure', reason: 'Failed to connect to DB' });
 				console.log(err);
 			});
@@ -97,7 +97,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				return;
 			}
 
-			const client = await MongoClient.connect(process.env.MONGODB_URL!, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+			const client = await MongoClient.connect(process.env.MONGODB_URL!).catch((err) => {
 				res.status(500).json({ type: 'failure', reason: 'Failed to connect to DB' });
 				console.log(err);
 			});
@@ -143,7 +143,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				return;
 			}
 
-			res.status(200).json({ type: 'success', event: result.ops[0] });
+			res.status(200).json({ type: 'success', event: dbEvent });
 			await client.close();
 			return;
 		}
@@ -160,7 +160,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				return;
 			}
 
-			const client = await MongoClient.connect(process.env.MONGODB_URL!, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+			const client = await MongoClient.connect(process.env.MONGODB_URL!).catch((err) => {
 				res.status(500).json({ type: 'failure', reason: 'Failed to connect to DB' });
 				console.log(err);
 			});
@@ -242,7 +242,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<EventsIndexRespo
 				return;
 			}
 
-			const client = await MongoClient.connect(process.env.MONGODB_URL!, { useNewUrlParser: true, useUnifiedTopology: true }).catch((err) => {
+			const client = await MongoClient.connect(process.env.MONGODB_URL!).catch((err) => {
 				res.status(500).json({ type: 'failure', reason: 'Failed to connect to DB' });
 				console.log(err);
 			});

@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<any> = async ({ req, res }) 
 	const token = req.cookies.token;
 
 	if (token) {
-		const client = await MongoClient.connect(process.env.MONGODB_URL!, { useNewUrlParser: true, useUnifiedTopology: true });
+		const client = await MongoClient.connect(process.env.MONGODB_URL!);
 		const collection = client.db('calendars').collection<DBUser>('users');
 
 		const user = await collection.findOne({ token });
