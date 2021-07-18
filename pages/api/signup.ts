@@ -16,6 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>)
 			}
 			if (!password) {
 				res.status(400).json({ type: 'failure', reason: 'Password is required' });
+				return;
 			}
 			if (username.length > 20) {
 				res.status(400).json({ type: 'failure', reason: 'Username must be less than 20 characters' });
@@ -87,10 +88,11 @@ export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>)
 
 			res.status(201).json({ type: 'success', token });
 			await client.close();
-			break;
+			return;
 		}
 		default: {
 			res.status(405).json({ type: 'failure', reason: 'Only POST requests are allowed' });
+			return;
 		}
 	}
 };

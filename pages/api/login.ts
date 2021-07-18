@@ -83,10 +83,11 @@ export default async (req: NextApiRequest, res: NextApiResponse<SigninResponse>)
 
 			res.status(201).json({ type: 'success', user });
 			await client.close();
-			break;
+			return;
 		}
 		default: {
 			res.status(405).json({ type: 'failure', reason: 'Only POST requests are allowed' });
+			return;
 		}
 	}
 };
