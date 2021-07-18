@@ -1,7 +1,7 @@
+import { passwordStrength } from 'check-password-strength';
 import crypto from 'crypto';
 import { MongoClient } from 'mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { commonPasswords, PasswordStrength, trigraphs } from 'tai-password-strength';
 import { v4 as uuid } from 'uuid';
 
 export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>): Promise<void> => {
@@ -29,11 +29,8 @@ export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>)
 				res.status(400).json({ type: 'failure', reason: 'Password must be at least 6 characters' });
 				return;
 			}
-			const ps = new PasswordStrength();
-			ps.addCommonPasswords(commonPasswords);
-			ps.addTrigraphMap(trigraphs);
-			const strength = ps.check(password).strengthCode;
-			if (strength === 'WEAK' || strength === 'VERY_WEAK' || strength === 'REASONABLE') {
+			const strength = passwordStrength(password).value as Strength;
+			if (strength === 'Too weak' || strength === 'Weak' || strength === 'Medium') {
 				res.status(400).json({ type: 'failure', reason: 'Password is weak' });
 				return;
 			}

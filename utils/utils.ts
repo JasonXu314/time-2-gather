@@ -1,15 +1,13 @@
 export function makeStrengthStatus(strength: Strength): string {
 	switch (strength) {
-		case 'VERY_WEAK':
+		case 'Too weak':
 			return 'Pathetic...';
-		case 'WEAK':
+		case 'Weak':
 			return 'You can do better.';
-		case 'REASONABLE':
+		case 'Medium':
 			return 'Getting there...';
-		case 'STRONG':
+		case 'Strong':
 			return 'Good Enough.';
-		case 'VERY_STRONG':
-			return 'Excellent!';
 	}
 }
 

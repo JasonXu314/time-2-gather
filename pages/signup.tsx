@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { passwordStrength } from 'check-password-strength';
 import cookie from 'cookie';
 import Cookies from 'js-cookie';
 import { MongoClient } from 'mongodb';
@@ -6,7 +7,6 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { GetServerSideProps, NextPage } from 'next/types';
 import { useCallback, useMemo, useState } from 'react';
-import { commonPasswords, PasswordStrength, trigraphs } from 'tai-password-strength';
 import { makeStrengthStatus } from '../utils/utils';
 
 const Signup: NextPage = () => {
@@ -18,12 +18,8 @@ const Signup: NextPage = () => {
 			return null;
 		}
 
-		const ps = new PasswordStrength();
-		ps.addCommonPasswords(commonPasswords);
-		ps.addTrigraphMap(trigraphs);
-
-		const result = ps.check(password);
-		return result.strengthCode as Strength;
+		const result = passwordStrength(password).value as Strength;
+		return result;
 	}, [password]);
 
 	const signup = useCallback(() => {
@@ -47,7 +43,7 @@ const Signup: NextPage = () => {
 			setErr('Password must be at least 6 characters');
 			return;
 		}
-		if (strength === 'WEAK' || strength === 'VERY_WEAK' || strength === 'REASONABLE') {
+		if (strength === 'Too weak' || strength === 'Weak' || strength === 'Medium') {
 			setErr('Password is weak');
 			return;
 		}
