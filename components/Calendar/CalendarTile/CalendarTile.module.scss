@@ -1,0 +1,15 @@
+.main {
+	width: 10em;
+	height: 7em;
+	border: 1px solid black;
+	overflow-y: hidden;
+
+	.list.long {
+		overflow-y: scroll;
+		height: 6em;
+
+		&::-webkit-scrollbar {
+			width: 0;
+		}
+	}
+}

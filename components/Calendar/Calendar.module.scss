@@ -1,0 +1,19 @@
+.main {
+	.body {
+		.row {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.blur {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 2;
+			backdrop-filter: blur(2px);
+		}
+	}
+}

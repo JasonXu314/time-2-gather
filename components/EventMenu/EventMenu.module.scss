@@ -1,0 +1,43 @@
+.main {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 3;
+	background: white;
+	padding: 1em 2em;
+
+	.row {
+		display: flex;
+		flex-direction: row;
+
+		.colon {
+			padding: 0.5em 0;
+		}
+
+		.year {
+			width: calc(4ch + 4px);
+		}
+
+		.month {
+			width: min-content;
+			margin-top: auto;
+		}
+
+		.day {
+			width: calc(3ch + 4px);
+		}
+
+		.hour {
+			width: calc(3ch + 4px);
+		}
+
+		.minute {
+			width: calc(3ch + 4px);
+		}
+	}
+
+	.error {
+		color: red;
+	}
+}

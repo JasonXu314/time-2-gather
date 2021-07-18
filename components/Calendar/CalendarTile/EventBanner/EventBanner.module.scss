@@ -1,0 +1,12 @@
+.main {
+	background-color: #6060f5;
+	border-radius: 6px;
+	margin: 1px 2px;
+	color: white;
+	padding: 0.25em 0.5em;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #5050f5;
+	}
+}
