@@ -6,6 +6,8 @@ import Head from 'next/head';
 import router from 'next/router';
 import { GetServerSideProps, NextPage } from 'next/types';
 import { useCallback, useState } from 'react';
+import Button from '../components/Button/Button';
+import Input from '../components/Input/Input';
 
 const Login: NextPage = () => {
 	const [username, setUsername] = useState<string>('');
@@ -43,21 +45,17 @@ const Login: NextPage = () => {
 				<title>Calendar App | Log In</title>
 				<style>{'html { margin: 0; }'}</style>
 			</Head>
-			<div>
-				<h4>Username</h4>
-				<input autoComplete="off" value={username} onChange={(evt) => setUsername(evt.target.value)} />
-			</div>
-			<div>
-				<h4>Password</h4>
-				<input
-					autoComplete="off"
-					value={password}
-					type="password"
-					onPaste={(evt) => evt.preventDefault()}
-					onChange={(evt) => setPassword(evt.target.value)}
-				/>
-			</div>
-			<button onClick={login}>Log In!</button>
+			<Input label="Username" autoComplete="off" value={username} onChange={(evt) => setUsername(evt.target.value)} />
+			<Input
+				label="Password"
+				autoComplete="off"
+				value={password}
+				type="password"
+				onPaste={(evt) => evt.preventDefault()}
+				onChange={(evt) => setPassword(evt.target.value)}
+				onEnter={login}
+			/>
+			<Button onClick={login}>Log In!</Button>
 			{err && <h4>{err}</h4>}
 		</div>
 	);

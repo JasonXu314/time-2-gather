@@ -48,10 +48,11 @@ export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>)
 				token: string = uuid();
 
 			const user = await users.findOne({ username }).catch((err) => {
-				res.status(500).json({ type: 'failure', reason: 'Failed to find user' });
+				res.status(500).json({ type: 'failure', reason: 'Failed to check user' });
 				console.log(err);
+				return null;
 			});
-			if (user === undefined) {
+			if (user === null) {
 				await client.close();
 				return;
 			}
@@ -91,6 +92,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<SignupResponse>)
 			return;
 		}
 		default: {
+			console.log('Bye');
 			res.status(405).json({ type: 'failure', reason: 'Only POST requests are allowed' });
 			return;
 		}

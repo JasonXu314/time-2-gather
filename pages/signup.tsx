@@ -7,6 +7,8 @@ import Head from 'next/head';
 import Router from 'next/router';
 import { GetServerSideProps, NextPage } from 'next/types';
 import { useCallback, useMemo, useState } from 'react';
+import Button from '../components/Button/Button';
+import Input from '../components/Input/Input';
 import { makeStrengthStatus } from '../utils/utils';
 
 const Signup: NextPage = () => {
@@ -69,21 +71,22 @@ const Signup: NextPage = () => {
 				<title>Calendar App | Sign Up</title>
 				<style>{'html { margin: 0; }'}</style>
 			</Head>
-			<div>
-				<h4>Username</h4>
-				<input autoComplete="off" value={username} onChange={(evt) => setUsername(evt.target.value)} />
-			</div>
-			<div>
-				<h4>Password</h4>
-				<input autoComplete="off" value={password} onPaste={(evt) => evt.preventDefault()} onChange={(evt) => setPassword(evt.target.value)} />
-			</div>
+			<Input label="Username" autoComplete="off" value={username} onChange={(evt) => setUsername(evt.target.value)} />
+			<Input
+				label="Password"
+				autoComplete="off"
+				value={password}
+				onPaste={(evt) => evt.preventDefault()}
+				onChange={(evt) => setPassword(evt.target.value)}
+				onEnter={signup}
+			/>
 			{strength && (
 				<div>
 					<h4>Strength:</h4>
 					<div>{makeStrengthStatus(strength)}</div>
 				</div>
 			)}
-			<button onClick={signup}>Sign Up!</button>
+			<Button onClick={signup}>Sign Up!</Button>
 			{err && <h4>{err}</h4>}
 		</div>
 	);

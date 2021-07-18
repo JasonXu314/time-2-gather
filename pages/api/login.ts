@@ -29,8 +29,9 @@ export default async (req: NextApiRequest, res: NextApiResponse<SigninResponse>)
 			const dbUser = await users.findOne({ username }).catch((err) => {
 				res.status(500).json({ type: 'failure', reason: 'Failed to get user' });
 				console.log(err);
+				return null;
 			});
-			if (dbUser === null) {
+			if (dbUser === undefined) {
 				res.status(401).json({ type: 'failure', reason: 'Username or password is incorrect!' });
 				await client.close();
 				return;

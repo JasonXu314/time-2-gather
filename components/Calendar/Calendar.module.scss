@@ -1,4 +1,14 @@
 .main {
+	.days {
+		display: grid;
+		width: calc((10em + 2px) * 7);
+		grid-template-columns: repeat(7, 1fr);
+
+		.day {
+			text-align: center;
+		}
+	}
+
 	.body {
 		.row {
 			display: flex;
